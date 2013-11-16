@@ -17,7 +17,7 @@ output led4;
 output sck;
 output di;
 input do;
-output reg cs;
+output cs;
 
 
 
@@ -145,48 +145,35 @@ always @(posedge clk96m) begin
     sd_status <= sd_status_w;
 end
 
-// resync of enable and cs
-always @(posedge clk96m) begin
- if (rst == 1'b1) begin
-   sd_en_q <= 1'b0;
-   cs <= 1'b1;
- end
- else if (sck == 1'b0) begin
-   sd_en_q <= sd_en;
-   cs <= cs_delay;
- end
-end
-
-
-
-spi_cmd spi_cmd0(
+SDctrl SDctrl0(
 .clk(clk96m),
 .rst(rst),
-
-.cmd(sd_cmd),
-.idata(sd_data),
-.en(sd_en_q),
 
 .sclk(sck),
 .mosi(di),
-.miso(do), 
+.miso(do),
+.cs(cs),
 
+.cmd(sd_cmd),
+.address(sd_data),
+.en(sd_en),
+.en_clk(sd_en_clk),
+.div_clk(sd_div_clk),
+.i_cs(cs_delay),
 
-.resp_long_status(),
-.resp_status(sd_status_w),
 .valid_status(sd_valid_status_w),
+.resp_status(sd_status_w),
+.rdy(rdy_w),
 
-.rdy(rdy_w)
+.data_out(),
+.data_out_valid()
 
 );
 
-SDDivider spi_clk0(
-.clk(clk96m),
-.rst(rst),
-.en(sd_en_clk),
-.value(sd_div_clk),
-.sclk(sck)
-);
+
+
+
+
 
 
 

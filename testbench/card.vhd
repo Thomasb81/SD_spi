@@ -178,7 +178,8 @@ begin
     cmd_spi_data_s   <= '1';
     soft_res_n_s     <= '1';
     set_block_len_s  <= false;
-    block_len_s      <= (others => '0');
+    --block_len_s      <= (others => '0');
+    block_len_s      <= x"00000200";
     new_read_addr_s  <= (others => '0');
     set_read_addr_s  <= false;
     start_read_s     <= false;
@@ -226,6 +227,11 @@ begin
         when "010000" =>
           block_len_s     <= unsigned(arg_v);
           set_block_len_s <= true;
+        -- CMD17: READ_BLOCK -----------------------------------------
+        when "010001" =>
+          new_read_addr_s <= unsigned(arg_v);
+          set_read_addr_s <= true;
+          read_data_v     := true;
         -- CMD18: READ_MULTIPLE_BLOCK -----------------------------------------
         when "010010" =>
           new_read_addr_s <= unsigned(arg_v);
@@ -311,8 +317,8 @@ begin
   begin
     if res_n_s = '0' then
       spi_mode_q  <= false;
-      idle_mode_q <= 5;
-      block_len_q <= (others => '0');
+      idle_mode_q <= 2;
+      block_len_q <= x"00000200";
       read_addr_q <= (others => '0');
 
     elsif spi_clk_i'event and spi_clk_i = '1' then
@@ -321,7 +327,7 @@ begin
       end if;
 
       if set_idle_mode_s then
-        idle_mode_q  <= 5;
+        idle_mode_q  <= 2;
       elsif poll_idle_mode_s then
         if idle_mode_q > 0 then
           idle_mode_q <= idle_mode_q - 1;
