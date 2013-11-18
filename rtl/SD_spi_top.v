@@ -218,7 +218,6 @@ SDdriver SDdriver0(
 
 .SDctrl_address(sd_address),
 .SDctrl_start(SDctrl_start),
-.SDctrl_done(),
 .state(driver_state),
 .nb_data(driver_nb_data),
 .data_cpt(driver_data_cpt)

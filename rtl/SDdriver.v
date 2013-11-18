@@ -16,7 +16,6 @@ module SDdriver(
     input SDctrl_available,
     output [31:0] SDctrl_address,
     output reg SDctrl_start,
-    output reg SDctrl_done,
     
     output reg [2:0] state,
     output reg [31:0] nb_data,
@@ -69,15 +68,14 @@ always @(posedge clk) begin
 
     case(state)
       `IDLE: begin
-        if (start == 1'b1 && available_q == 1'b1 && SDctrl_available == 1'b1) begin
+        if (start == 1'b1 && available_q == 1'b1 && SDctrl_available == 1'b1 && fifo_empty == 1'b1) begin
           state <= `BOOT;
           SDctrl_start <= 1'b1;
           data_cpt <= 11'h000;
+          block_cnt <= 23'h000000;
         end
         else begin
           state <= `IDLE;
-          SDctrl_start <= 1'b0;
-          data_cpt <= 11'h000;
         end
       end
       `BOOT:begin
@@ -146,7 +144,6 @@ always @(posedge clk) begin
         if (SDctrl_valid == 1'b1 && finish == 1'b0)begin
           data_cpt <= data_cpt +1;
           
-          //if (cpt_bottom <= data_cpt[7:0] && data_cpt[7:0] <= cpt_up) begin
           if (cpt_bottom <= data_cpt && data_cpt <= cpt_up) begin
             nb_data <= nb_data -1;
             if (data_cpt[0]==1'b0) begin
@@ -198,11 +195,9 @@ assign finish = (nb_data == 0 )? 1'b1 : 1'b0;
 assign SDctrl_address = {block_cnt,9'b000000000} ; 
 
 assign cpt_bottom = (state == `FIRST_FETCH) ? addr[7:0] : 
-                     //(block_part == 1'b0) ? 9'h00 : 9'h0ff;
                      (block_part == 1'b0) ? 9'h00 : 9'h100;
 
 assign cpt_up = (state ==`FIRST_FETCH) ? 512 - addr[7:0] :
-                     //(block_part == 1'b0) ? 9'h100 : 9'h1ff;
                      (block_part == 1'b0) ? 9'hff : 9'h1ff;
                      
 
