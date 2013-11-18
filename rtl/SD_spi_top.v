@@ -35,9 +35,7 @@ reg [6:0] cmd_rx;
 
 /*SD */
 reg [6:0] sd_cmd;
-reg [31:0] sd_data;
 reg sd_en;
-reg sd_en_q;
 reg sd_en_clk;
 reg [7:0] sd_div_clk;
 reg [6:0] sd_status;
@@ -45,6 +43,31 @@ reg cs_delay;
 wire rdy_w;
 wire [6:0] sd_status_w;
 wire sd_valid_status_w;
+reg driver_start;
+
+wire [31:0] sd_address;
+wire [7:0] data_driver;
+wire data_driver_valid;
+wire SDctrl_start;
+
+wire [2:0] driver_state;
+wire [31:0] driver_nb_data;
+wire [10:0] driver_data_cpt;
+
+
+wire fifo_empty;
+wire fifo_full;
+wire fifo_halffull;
+wire fifo_wr_en;
+wire [15:0] fifo_data_in;
+
+reg [10:0] tick_48k;
+reg fifo_rd_en;
+wire [15:0] fifo_out;
+wire [15:0] pcm;
+wire dac_out;
+
+
 
 /* reset stuff*/
 wire rst;
@@ -81,11 +104,11 @@ always @(posedge clk96m) begin
     cmd_rx <= 7'h00;
 
     sd_cmd <= 7'h00;
-    sd_data <= 32'h00000000;
     sd_en <= 1'b0;
     sd_en_clk <= 1'b0;
-    sd_div_clk <= 8'hff;
+    sd_div_clk <= 8'hd0;
     cs_delay <= 1'b1;
+    driver_start <= 1'b0;
 
   end
   else begin
@@ -114,10 +137,7 @@ always @(posedge clk96m) begin
         7'd2: sd_div_clk <= data_rx;
         7'd3: sd_cmd <= data_rx[6:0];
         7'd4: sd_en <= data_rx[0];
-        7'd7: sd_data[7:0] <= data_rx;
-        7'd8: sd_data[15:8] <= data_rx;
-        7'd9: sd_data[23:16] <= data_rx;
-        7'd10: sd_data[31:24] <= data_rx;
+        7'd5: driver_start <= data_rx[0];
         endcase
       end
     end
@@ -127,22 +147,33 @@ end
 
 assign data_tx = (cmd_rx ==7'd5 )? {7'h00,rdy_w} :
                  (cmd_rx ==7'd6 )? {1'b0,sd_status} :
+                 (cmd_rx ==7'd7 )? {5'h00,driver_state}:
+                 (cmd_rx ==7'd8 )? sd_address[7:0]:
+                 (cmd_rx ==7'd9 )? sd_address[15:8]:
+                 (cmd_rx ==7'd10 )? sd_address[23:16]:
+                 (cmd_rx ==7'd11 )? sd_address[31:24]:
+                 (cmd_rx ==7'd12 )? driver_nb_data[7:0]:
+                 (cmd_rx ==7'd13 )? driver_nb_data[15:8]:
+                 (cmd_rx ==7'd14 )? driver_nb_data[23:16]:
+                 (cmd_rx ==7'd15 )? driver_nb_data[31:24]:
+                 (cmd_rx ==7'd16 )? driver_data_cpt[7:0]:
+                 (cmd_rx ==7'd17 )? {5'b00000,driver_data_cpt[10:8]}:
                  8'h55;
 assign valid_data_tx = (rx_state == `RX_RD) ? 1'b1 : 1'b0;
 
-assign {led4,led3,led2,led1} = 4'b0000;
+assign {led4,led3,led2,led1} = {rdy_w,fifo_full,fifo_halffull,fifo_empty};
 
-assign audio_l = 1'b1;
-assign audio_r = 1'b1;
+assign audio_l = dac_out;
+assign audio_r = dac_out;
 
 
 always @(posedge clk96m) begin
   if (rst == 1'b1)
     sd_status <= 7'hff;
-  else if (sd_en ==1'b0)
-    sd_status <= 7'hff;
   else if (sd_valid_status_w == 1'b1)
     sd_status <= sd_status_w;
+  else if (sd_en ==1'b0 && SDctrl_start==1'b0)
+    sd_status <= 7'hff;
 end
 
 SDctrl SDctrl0(
@@ -155,8 +186,8 @@ SDctrl SDctrl0(
 .cs(cs),
 
 .cmd(sd_cmd),
-.address(sd_data),
-.en(sd_en),
+.address(sd_address),
+.en( sd_en || SDctrl_start ),
 .en_clk(sd_en_clk),
 .div_clk(sd_div_clk),
 .i_cs(cs_delay),
@@ -165,16 +196,74 @@ SDctrl SDctrl0(
 .resp_status(sd_status_w),
 .rdy(rdy_w),
 
-.data_out(),
-.data_out_valid()
+.data_out(data_driver),
+.data_out_valid(data_driver_valid)
 
+);
+
+SDdriver SDdriver0(
+.clk(clk96m),
+.rst(rst),
+.start(driver_start),
+.sample_code(8'h00),
+.fifo_empty(fifo_empty),
+.fifo_full(fifo_full),
+.fifo_prog(fifo_halffull),
+.fifo_wr(fifo_wr_en),
+.fifo_data(fifo_data_in),
+
+.SDctrl_data(data_driver),
+.SDctrl_valid(data_driver_valid),
+.SDctrl_available(rdy_w),
+
+.SDctrl_address(sd_address),
+.SDctrl_start(SDctrl_start),
+.SDctrl_done(),
+.state(driver_state),
+.nb_data(driver_nb_data),
+.data_cpt(driver_data_cpt)
+
+);
+
+
+fifo_256w fifo0(
+.clk(clk96m),
+.srst(rst),
+.din(fifo_data_in),
+.wr_en(fifo_wr_en),
+.rd_en(fifo_rd_en),
+.dout(fifo_out),
+.full(fifo_full),
+.empty(fifo_empty),
+.prog_full(fifo_halffull)
 );
 
 
 
 
+always @(posedge clk96m) begin
+  if (rst == 1'b1) begin
+    tick_48k <= 0;
+    fifo_rd_en <=1'b0;
+  end
+  else if (tick_48k == 2000)begin
+    tick_48k <=0;
+    fifo_rd_en <=1'b1;
+  end
+  else begin
+    tick_48k <= tick_48k+1;
+    fifo_rd_en <= 1'b0;
+  end
+end
 
+assign pcm = (fifo_empty== 1'b1) ? 16'h8000 : fifo_out;
 
+dac16 dac0 (
+.clk(clk96m), 
+.rst(rst), 
+.data(pcm), 
+.dac_out(dac_out)
+);
 
 
 // Reset part ! close your eyes or you will be chocked :)

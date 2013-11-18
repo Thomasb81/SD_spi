@@ -103,6 +103,10 @@ architecture behav of card is
 
   signal data_mem : std_logic_vector( 7 downto 0);
 
+  signal cmd_rx : std_logic_vector (5 downto 0);
+
+
+
   procedure rise_clk is
   begin
     wait until spi_clk_i'event and to_X01(spi_clk_i) = '1';
@@ -203,6 +207,7 @@ begin
 
       -- dissect received data
       cmd_v := rx_v(45 downto 40);
+      cmd_rx <= rx_v(45 downto 40);
       arg_v := rx_v(39 downto  8);
       crc_v := rx_v( 7 downto  1);
 
@@ -267,10 +272,11 @@ begin
       set_block_len_s <= false;
       set_read_addr_s <= false;
 
+      -- sync with read process
+      -- reading_s is true when a block is send
       if reading_s then
         wait until not reading_s;
       end if;
-
 
       -- wait for a total two "bytes" before sending out response
       for i in 1 to 8 loop
@@ -297,6 +303,12 @@ begin
 
       -- transmit data if requested
       start_read_s <= read_data_v;
+     
+      if (cmd_v = "010001") then
+        wait until reading_s = true;
+        wait until reading_s = false;
+        start_read_s <= false;
+      end if;
 
     end loop;
   end process ctrl;
@@ -344,6 +356,8 @@ begin
         read_addr_q <= read_addr_q + 1;
       end if;
 
+
+
     end if;
   end process seq;
   --
@@ -363,10 +377,11 @@ begin
     read_spi_data_s <= '1';
 
     loop
+
       if not start_read_s then
         wait until start_read_s;
       end if;
-
+      
       reading_s <= true;
 
       fall_clk(8);                    -- delay for one "byte"

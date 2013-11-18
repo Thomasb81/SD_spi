@@ -208,4 +208,8 @@ end
 assign data_out = rsp_message[7:0];
 assign data_out_valid = data_out_valid_q == 1'b0 && recv_cpt[2:0] == 3'b111 && recv_state == `RECV_DATA;
 
+initial begin
+  recv_state <= `RECV_IDLE;
+end
+
 endmodule

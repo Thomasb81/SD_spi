@@ -78,6 +78,7 @@ class randtermFrame(wx.Frame, Thread):
     self.Bind(wx.EVT_MENU, self.OnSetPort, self.setPort)
     self.connectMenu.AppendSeparator()
     self.portName = ""
+    self.displayPortName = wx.TextCtrl(self, style=wx.TE_LEFT | wx.TE_READONLY, size=(160,25)  )
     ## Baud SubMenu
     self.baudRadios = []
     self.baudMenu = wx.Menu()
@@ -138,9 +139,20 @@ class randtermFrame(wx.Frame, Thread):
     outputSizer = wx.BoxSizer(wx.VERTICAL)
     ## Output Type
     topSizer = wx.BoxSizer(wx.HORIZONTAL)
-    self.displayTypeRadios = wx.RadioBox(self, wx.ID_ANY,
-                                       style=wx.RA_HORIZONTAL, label="RX Format",
-                                       choices = ('Ascii', 'Decimal', 'Hex', 'Binary'))
+    
+    topSizer.Add(wx.StaticText(self, wx.ID_ANY, " Port: "))
+    #self.displayPortName = wx.TextCtrl(self, style=wx.TE_LEFT | wx.TE_READONLY)
+    topSizer.Add(self.displayPortName)
+
+    
+    outputSizer.Add(topSizer, flag=wx.EXPAND)
+    
+    topSizer = wx.BoxSizer(wx.HORIZONTAL)
+    radiobox = wx.RadioBox(self, wx.ID_ANY,
+                           style=wx.RA_HORIZONTAL, label="RX Format",
+                           choices = ('Ascii', 'Decimal', 'Hex', 'Binary'))
+    radiobox.SetSelection(2)
+    self.displayTypeRadios = radiobox
     self.Bind(wx.EVT_RADIOBOX, self.OnChangeDisplay, self.displayTypeRadios)
     topSizer.Add(self.displayTypeRadios, 0)
     self.clearOutputButton = wx.Button(self, id=wx.ID_ANY, label="Clear")
@@ -157,13 +169,13 @@ class randtermFrame(wx.Frame, Thread):
     # Input Area
     lowerAreaSizer = wx.BoxSizer(wx.VERTICAL)
 #    ## LiveType
-    liveTypeSizer = wx.BoxSizer(wx.HORIZONTAL)
-    lowerAreaSizer.Add(liveTypeSizer)
-    liveTypeSizer.Add(wx.StaticText(self, wx.ID_ANY, " LiveType: "))
-    self.liveType = wx.TextCtrl(self, wx.ID_ANY, '',
-                                style=wx.TE_LEFT|wx.TE_MULTILINE|wx.TE_RICH, size=(160,25))
-    liveTypeSizer.Add(self.liveType)
-    self.Bind(wx.EVT_TEXT, self.OnSendLiveType, self.liveType)
+#    liveTypeSizer = wx.BoxSizer(wx.HORIZONTAL)
+#    lowerAreaSizer.Add(liveTypeSizer)
+#    liveTypeSizer.Add(wx.StaticText(self, wx.ID_ANY, " LiveType: "))
+#    self.liveType = wx.TextCtrl(self, wx.ID_ANY, '',
+#                                style=wx.TE_LEFT|wx.TE_MULTILINE|wx.TE_RICH, size=(160,25))
+#    liveTypeSizer.Add(self.liveType)
+#    self.Bind(wx.EVT_TEXT, self.OnSendLiveType, self.liveType)
     ## Input Array
     lowerAreaSizer2 = wx.BoxSizer(wx.HORIZONTAL)
     lowerAreaSizer.Add(lowerAreaSizer2)
@@ -181,8 +193,9 @@ class randtermFrame(wx.Frame, Thread):
       self.Bind(wx.EVT_TEXT_ENTER, self.OnSendInput, self.inputAreas[-1])
       inputSizer.Add(wx.StaticText(self, wx.ID_ANY, " " + str(i)+" : "))
       inputSizer.Add(self.inputAreas[-1], 4)
-      self.inputFormats.append(
-        wx.Choice(self, id=wx.ID_ANY, choices=formatTypes))
+      choice = wx.Choice(self, id=wx.ID_ANY, choices=formatTypes)
+      choice.SetSelection(2)
+      self.inputFormats.append(choice)
       inputSizer.Add(self.inputFormats[-1])
       inputAreasSizer.Add(inputSizer)
     ### Input Type Radios
@@ -249,6 +262,8 @@ class randtermFrame(wx.Frame, Thread):
 
     if self.cfg.Exists('portname'):
       self.portName = self.cfg.Read('portname')
+      self.displayPortName.Clear()
+      self.displayPortName.write(self.portName)
 
   ##################################################
   def run(self):
@@ -325,6 +340,8 @@ class randtermFrame(wx.Frame, Thread):
   ##################################################
   def OnSetPort(self, event):
     self.portName = wx.GetTextFromUser('Port: ', 'Select Port Name', self.portName)
+    self.displayPortName.clear()
+    self.displayPortName.write(self.portName)
 
   ##################################################
   def OnSetConnection(self, event):
@@ -430,6 +447,7 @@ class randtermFrame(wx.Frame, Thread):
       exit()
 
     inputVal = ''
+    inputDelay = []
     typeString = self.inputFormats[i].GetStringSelection()
 
     if(typeString == 'Ascii'):
@@ -456,7 +474,11 @@ class randtermFrame(wx.Frame, Thread):
       self.historyLock.acquire()
       self.history = self.history + newHistoryVals
       self.historyLock.release()
-      self.serialCon.write(inputVal)
+      for c in inputVal:
+        self.serialCon.write(c)
+        time.sleep(0.01)
+      #self.serialCon.write(inputVal)
+      
       if self.printSentData.IsChecked():
         self.appendToDisplay(newHistoryVals)
 

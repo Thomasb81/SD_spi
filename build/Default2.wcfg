@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/tom/prog/git/SD_spi/build/testbench_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_textio" />
+            <top_module name="std_logic_unsigned" />
+            <top_module name="tb_pack" />
+            <top_module name="testbench" />
+            <top_module name="textio" />
+            <top_module name="vl_types" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="6" />
+   <wvobject fp_name="group36" type="group">
+      <obj_property name="label">ctrl0</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/sclk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sclk</obj_property>
+         <obj_property name="ObjectShortName">sclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/mosi" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">mosi</obj_property>
+         <obj_property name="ObjectShortName">mosi</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/miso" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">miso</obj_property>
+         <obj_property name="ObjectShortName">miso</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/cmd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cmd[6:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd[6:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">address[31:0]</obj_property>
+         <obj_property name="ObjectShortName">address[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/en_clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en_clk</obj_property>
+         <obj_property name="ObjectShortName">en_clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/div_clk" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">div_clk[7:0]</obj_property>
+         <obj_property name="ObjectShortName">div_clk[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/i_cs" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">i_cs</obj_property>
+         <obj_property name="ObjectShortName">i_cs</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/valid_status" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">valid_status</obj_property>
+         <obj_property name="ObjectShortName">valid_status</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/resp_status" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">resp_status[6:0]</obj_property>
+         <obj_property name="ObjectShortName">resp_status[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/rdy" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rdy</obj_property>
+         <obj_property name="ObjectShortName">rdy</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/data_out" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/data_out_valid" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">data_out_valid</obj_property>
+         <obj_property name="ObjectShortName">data_out_valid</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/cs" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">cs</obj_property>
+         <obj_property name="ObjectShortName">cs</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/sd_en_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_en_q</obj_property>
+         <obj_property name="ObjectShortName">sd_en_q</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group56" type="group">
+      <obj_property name="label">driver</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">start</obj_property>
+         <obj_property name="ObjectShortName">start</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/sample_code" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sample_code[7:0]</obj_property>
+         <obj_property name="ObjectShortName">sample_code[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/fifo_empty" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_empty</obj_property>
+         <obj_property name="ObjectShortName">fifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/fifo_full" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_full</obj_property>
+         <obj_property name="ObjectShortName">fifo_full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/fifo_prog" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_prog</obj_property>
+         <obj_property name="ObjectShortName">fifo_prog</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_data[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_valid" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_valid</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_valid</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_available" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_available</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_available</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/available_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">available_q</obj_property>
+         <obj_property name="ObjectShortName">available_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_address[31:0]</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_address[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/finish" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">finish</obj_property>
+         <obj_property name="ObjectShortName">finish</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/cpt_bottom" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cpt_bottom[8:0]</obj_property>
+         <obj_property name="ObjectShortName">cpt_bottom[8:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/cpt_up" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cpt_up[8:0]</obj_property>
+         <obj_property name="ObjectShortName">cpt_up[8:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/fifo_wr" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_wr</obj_property>
+         <obj_property name="ObjectShortName">fifo_wr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/fifo_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_data[15:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_data[15:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_start</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_start</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_done" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_done</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_done</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/nb_data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">nb_data[31:0]</obj_property>
+         <obj_property name="ObjectShortName">nb_data[31:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_cpt[10:0]</obj_property>
+         <obj_property name="ObjectShortName">data_cpt[10:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addr[7:0]</obj_property>
+         <obj_property name="ObjectShortName">addr[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/block_cnt" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">block_cnt[22:0]</obj_property>
+         <obj_property name="ObjectShortName">block_cnt[22:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/block_part" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">block_part</obj_property>
+         <obj_property name="ObjectShortName">block_part</obj_property>
+      </wvobject>
+      <wvobject fp_name="vbus210" type="vbus" db_ref_id="1">
+         <obj_property name="label">current_address</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/block_cnt" type="array" db_ref_id="1">
+            <obj_property name="ElementShortName">block_cnt[22:0]</obj_property>
+            <obj_property name="ObjectShortName">block_cnt[22:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/block_part" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">block_part</obj_property>
+            <obj_property name="ObjectShortName">block_part</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[7]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[7]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[7]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[6]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[6]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[6]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[5]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[5]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[5]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[4]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[4]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[4]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[3]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[3]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[3]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[2]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[2]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[2]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[1]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[1]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[1]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/data_cpt[0]" type="logic" db_ref_id="1">
+            <obj_property name="ElementShortName">[0]</obj_property>
+            <obj_property name="ObjectShortName">data_cpt[0]</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group66" type="group">
+      <obj_property name="label">fifo</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/srst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">srst</obj_property>
+         <obj_property name="ObjectShortName">srst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/din" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">din[15:0]</obj_property>
+         <obj_property name="ObjectShortName">din[15:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/wr_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">wr_en</obj_property>
+         <obj_property name="ObjectShortName">wr_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/rd_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rd_en</obj_property>
+         <obj_property name="ObjectShortName">rd_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/dout" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">dout[15:0]</obj_property>
+         <obj_property name="ObjectShortName">dout[15:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/empty" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">empty</obj_property>
+         <obj_property name="ObjectShortName">empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/prog_full" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">prog_full</obj_property>
+         <obj_property name="ObjectShortName">prog_full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo0/full" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">full</obj_property>
+         <obj_property name="ObjectShortName">full</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group121" type="group">
+      <obj_property name="label">top</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/osc_in" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">osc_in</obj_property>
+         <obj_property name="ObjectShortName">osc_in</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/bp1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">bp1</obj_property>
+         <obj_property name="ObjectShortName">bp1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/bp2" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">bp2</obj_property>
+         <obj_property name="ObjectShortName">bp2</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/bp3" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">bp3</obj_property>
+         <obj_property name="ObjectShortName">bp3</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/bp4" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">bp4</obj_property>
+         <obj_property name="ObjectShortName">bp4</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/usb_rx" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">usb_rx</obj_property>
+         <obj_property name="ObjectShortName">usb_rx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/usb_tx" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">usb_tx</obj_property>
+         <obj_property name="ObjectShortName">usb_tx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/audio_r" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">audio_r</obj_property>
+         <obj_property name="ObjectShortName">audio_r</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/audio_l" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">audio_l</obj_property>
+         <obj_property name="ObjectShortName">audio_l</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/led1" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">led1</obj_property>
+         <obj_property name="ObjectShortName">led1</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/led2" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">led2</obj_property>
+         <obj_property name="ObjectShortName">led2</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/led3" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">led3</obj_property>
+         <obj_property name="ObjectShortName">led3</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/led4" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">led4</obj_property>
+         <obj_property name="ObjectShortName">led4</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sck" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sck</obj_property>
+         <obj_property name="ObjectShortName">sck</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/di" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">di</obj_property>
+         <obj_property name="ObjectShortName">di</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/do" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">do</obj_property>
+         <obj_property name="ObjectShortName">do</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/cs" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">cs</obj_property>
+         <obj_property name="ObjectShortName">cs</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/clk96m" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk96m</obj_property>
+         <obj_property name="ObjectShortName">clk96m</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/clk32" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk32</obj_property>
+         <obj_property name="ObjectShortName">clk32</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/data_rx" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_rx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_rx[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/data_tx" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_tx[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_tx[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/valid_data_rx" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">valid_data_rx</obj_property>
+         <obj_property name="ObjectShortName">valid_data_rx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/valid_data_tx" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">valid_data_tx</obj_property>
+         <obj_property name="ObjectShortName">valid_data_tx</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/rdy_w" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rdy_w</obj_property>
+         <obj_property name="ObjectShortName">rdy_w</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_status_w" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_status_w[6:0]</obj_property>
+         <obj_property name="ObjectShortName">sd_status_w[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_valid_status_w" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_valid_status_w</obj_property>
+         <obj_property name="ObjectShortName">sd_valid_status_w</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_address" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_address[31:0]</obj_property>
+         <obj_property name="ObjectShortName">sd_address[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/data_driver" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_driver[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_driver[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/data_driver_valid" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">data_driver_valid</obj_property>
+         <obj_property name="ObjectShortName">data_driver_valid</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl_start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_start</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_start</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo_empty" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_empty</obj_property>
+         <obj_property name="ObjectShortName">fifo_empty</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo_full" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_full</obj_property>
+         <obj_property name="ObjectShortName">fifo_full</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo_halffull" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_halffull</obj_property>
+         <obj_property name="ObjectShortName">fifo_halffull</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo_wr_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_wr_en</obj_property>
+         <obj_property name="ObjectShortName">fifo_wr_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo_data_in" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_data_in[15:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_data_in[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo_out" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_out[15:0]</obj_property>
+         <obj_property name="ObjectShortName">fifo_out[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/pcm" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">pcm[15:0]</obj_property>
+         <obj_property name="ObjectShortName">pcm[15:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/dac_out" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">dac_out</obj_property>
+         <obj_property name="ObjectShortName">dac_out</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/rst_cmd" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst_cmd</obj_property>
+         <obj_property name="ObjectShortName">rst_cmd</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/rx_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rx_state[1:0]</obj_property>
+         <obj_property name="ObjectShortName">rx_state[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/cmd_rx" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cmd_rx[6:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd_rx[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_cmd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_cmd[6:0]</obj_property>
+         <obj_property name="ObjectShortName">sd_cmd[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_en</obj_property>
+         <obj_property name="ObjectShortName">sd_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_en_clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_en_clk</obj_property>
+         <obj_property name="ObjectShortName">sd_en_clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_div_clk" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_div_clk[7:0]</obj_property>
+         <obj_property name="ObjectShortName">sd_div_clk[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_status" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_status[6:0]</obj_property>
+         <obj_property name="ObjectShortName">sd_status[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/cs_delay" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">cs_delay</obj_property>
+         <obj_property name="ObjectShortName">cs_delay</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/driver_start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">driver_start</obj_property>
+         <obj_property name="ObjectShortName">driver_start</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/tick_48k" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">tick_48k[10:0]</obj_property>
+         <obj_property name="ObjectShortName">tick_48k[10:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/fifo_rd_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">fifo_rd_en</obj_property>
+         <obj_property name="ObjectShortName">fifo_rd_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/rst_cpt" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rst_cpt[3:0]</obj_property>
+         <obj_property name="ObjectShortName">rst_cpt[3:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group255" type="group">
+      <obj_property name="label">spi_cmd0</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/cmd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cmd[6:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd[6:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/idata" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">idata[31:0]</obj_property>
+         <obj_property name="ObjectShortName">idata[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/sclk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sclk</obj_property>
+         <obj_property name="ObjectShortName">sclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/mosi" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">mosi</obj_property>
+         <obj_property name="ObjectShortName">mosi</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/miso" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">miso</obj_property>
+         <obj_property name="ObjectShortName">miso</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/valid_status" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">valid_status</obj_property>
+         <obj_property name="ObjectShortName">valid_status</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/resp_status" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">resp_status[6:0]</obj_property>
+         <obj_property name="ObjectShortName">resp_status[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/data_out" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_out[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_out[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/data_out_valid" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">data_out_valid</obj_property>
+         <obj_property name="ObjectShortName">data_out_valid</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/cmd_message" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cmd_message[45:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd_message[45:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/spi_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">spi_state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">spi_state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/known_cmd" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">known_cmd</obj_property>
+         <obj_property name="ObjectShortName">known_cmd</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/spi_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">spi_en</obj_property>
+         <obj_property name="ObjectShortName">spi_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/valid_status_internal" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">valid_status_internal</obj_property>
+         <obj_property name="ObjectShortName">valid_status_internal</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/sclk_en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sclk_en</obj_property>
+         <obj_property name="ObjectShortName">sclk_en</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/resp_long_status" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">resp_long_status</obj_property>
+         <obj_property name="ObjectShortName">resp_long_status</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/rdy" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rdy</obj_property>
+         <obj_property name="ObjectShortName">rdy</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/cpt" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cpt[3:0]</obj_property>
+         <obj_property name="ObjectShortName">cpt[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/valid_status_internal_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">valid_status_internal_q</obj_property>
+         <obj_property name="ObjectShortName">valid_status_internal_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/sclk_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sclk_q</obj_property>
+         <obj_property name="ObjectShortName">sclk_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/en_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en_q</obj_property>
+         <obj_property name="ObjectShortName">en_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/rsp_message" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rsp_message[7:0]</obj_property>
+         <obj_property name="ObjectShortName">rsp_message[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/recv_cpt" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">recv_cpt[12:0]</obj_property>
+         <obj_property name="ObjectShortName">recv_cpt[12:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/recv_state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">recv_state[1:0]</obj_property>
+         <obj_property name="ObjectShortName">recv_state[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/spi_cmd0/data_out_valid_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">data_out_valid_q</obj_property>
+         <obj_property name="ObjectShortName">data_out_valid_q</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group208" type="group">
+      <obj_property name="label">Card</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/card_b/mem0/addr" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">addr[31:0]</obj_property>
+         <obj_property name="ObjectShortName">addr[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/mem0/data" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/spi_clk_i" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">spi_clk_i</obj_property>
+         <obj_property name="ObjectShortName">spi_clk_i</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/spi_cs_n_i" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">spi_cs_n_i</obj_property>
+         <obj_property name="ObjectShortName">spi_cs_n_i</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/spi_data_i" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">spi_data_i</obj_property>
+         <obj_property name="ObjectShortName">spi_data_i</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/spi_data_o" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">spi_data_o</obj_property>
+         <obj_property name="ObjectShortName">spi_data_o</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/power_on_n_s" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">power_on_n_s</obj_property>
+         <obj_property name="ObjectShortName">power_on_n_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/soft_res_n_s" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">soft_res_n_s</obj_property>
+         <obj_property name="ObjectShortName">soft_res_n_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/res_n_s" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">res_n_s</obj_property>
+         <obj_property name="ObjectShortName">res_n_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/rx_s" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">rx_s[47:0]</obj_property>
+         <obj_property name="ObjectShortName">rx_s[47:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/set_spi_mode_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">set_spi_mode_s</obj_property>
+         <obj_property name="ObjectShortName">set_spi_mode_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/spi_mode_q" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">spi_mode_q</obj_property>
+         <obj_property name="ObjectShortName">spi_mode_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/set_idle_mode_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">set_idle_mode_s</obj_property>
+         <obj_property name="ObjectShortName">set_idle_mode_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/poll_idle_mode_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">poll_idle_mode_s</obj_property>
+         <obj_property name="ObjectShortName">poll_idle_mode_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/idle_mode_q" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">idle_mode_q</obj_property>
+         <obj_property name="ObjectShortName">idle_mode_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/block_len_q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">block_len_q[31:0]</obj_property>
+         <obj_property name="ObjectShortName">block_len_q[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/block_len_s" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">block_len_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">block_len_s[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/set_block_len_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">set_block_len_s</obj_property>
+         <obj_property name="ObjectShortName">set_block_len_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/new_read_addr_s" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">new_read_addr_s[31:0]</obj_property>
+         <obj_property name="ObjectShortName">new_read_addr_s[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/read_addr_q" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">read_addr_q[31:0]</obj_property>
+         <obj_property name="ObjectShortName">read_addr_q[31:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/set_read_addr_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">set_read_addr_s</obj_property>
+         <obj_property name="ObjectShortName">set_read_addr_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/inc_read_addr_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">inc_read_addr_s</obj_property>
+         <obj_property name="ObjectShortName">inc_read_addr_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/cmd_spi_data_s" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">cmd_spi_data_s</obj_property>
+         <obj_property name="ObjectShortName">cmd_spi_data_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/read_spi_data_s" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">read_spi_data_s</obj_property>
+         <obj_property name="ObjectShortName">read_spi_data_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/start_read_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">start_read_s</obj_property>
+         <obj_property name="ObjectShortName">start_read_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/reading_s" type="other" db_ref_id="1">
+         <obj_property name="ElementShortName">reading_s</obj_property>
+         <obj_property name="ObjectShortName">reading_s</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/data_mem" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">data_mem[7:0]</obj_property>
+         <obj_property name="ObjectShortName">data_mem[7:0]</obj_property>
+         <obj_property name="Radix">HEXRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/card_b/cmd_rx" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cmd_rx[5:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd_rx[5:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>
