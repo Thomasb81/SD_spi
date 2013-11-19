@@ -340,7 +340,7 @@ class randtermFrame(wx.Frame, Thread):
   ##################################################
   def OnSetPort(self, event):
     self.portName = wx.GetTextFromUser('Port: ', 'Select Port Name', self.portName)
-    self.displayPortName.clear()
+    self.displayPortName.Clear()
     self.displayPortName.write(self.portName)
 
   ##################################################
