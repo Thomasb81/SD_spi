@@ -18,7 +18,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="6" />
+   <WVObjectSize size="7" />
    <wvobject fp_name="group36" type="group">
       <obj_property name="label">ctrl0</obj_property>
       <obj_property name="DisplayName">label</obj_property>
@@ -64,10 +64,6 @@
          <obj_property name="ElementShortName">div_clk[7:0]</obj_property>
          <obj_property name="ObjectShortName">div_clk[7:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/i_cs" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">i_cs</obj_property>
-         <obj_property name="ObjectShortName">i_cs</obj_property>
-      </wvobject>
       <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/valid_status" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">valid_status</obj_property>
          <obj_property name="ObjectShortName">valid_status</obj_property>
@@ -95,6 +91,18 @@
       <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/sd_en_q" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">sd_en_q</obj_property>
          <obj_property name="ObjectShortName">sd_en_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/sd_en_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sd_en_q</obj_property>
+         <obj_property name="ObjectShortName">sd_en_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/en_boot" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en_boot</obj_property>
+         <obj_property name="ObjectShortName">en_boot</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/en" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en</obj_property>
+         <obj_property name="ObjectShortName">en</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group56" type="group">
@@ -176,10 +184,6 @@
       <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_start" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">SDctrl_start</obj_property>
          <obj_property name="ObjectShortName">SDctrl_start</obj_property>
-      </wvobject>
-      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/SDctrl_done" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">SDctrl_done</obj_property>
-         <obj_property name="ObjectShortName">SDctrl_done</obj_property>
       </wvobject>
       <wvobject fp_name="/testbench/Inst_SD_spi_top/SDdriver0/state" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">state[2:0]</obj_property>
@@ -472,25 +476,13 @@
          <obj_property name="ElementShortName">sd_cmd[6:0]</obj_property>
          <obj_property name="ObjectShortName">sd_cmd[6:0]</obj_property>
       </wvobject>
-      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_en" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">sd_en</obj_property>
-         <obj_property name="ObjectShortName">sd_en</obj_property>
-      </wvobject>
       <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_en_clk" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">sd_en_clk</obj_property>
          <obj_property name="ObjectShortName">sd_en_clk</obj_property>
       </wvobject>
-      <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_div_clk" type="array" db_ref_id="1">
-         <obj_property name="ElementShortName">sd_div_clk[7:0]</obj_property>
-         <obj_property name="ObjectShortName">sd_div_clk[7:0]</obj_property>
-      </wvobject>
       <wvobject fp_name="/testbench/Inst_SD_spi_top/sd_status" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">sd_status[6:0]</obj_property>
          <obj_property name="ObjectShortName">sd_status[6:0]</obj_property>
-      </wvobject>
-      <wvobject fp_name="/testbench/Inst_SD_spi_top/cs_delay" type="logic" db_ref_id="1">
-         <obj_property name="ElementShortName">cs_delay</obj_property>
-         <obj_property name="ObjectShortName">cs_delay</obj_property>
       </wvobject>
       <wvobject fp_name="/testbench/Inst_SD_spi_top/driver_start" type="logic" db_ref_id="1">
          <obj_property name="ElementShortName">driver_start</obj_property>
@@ -631,6 +623,10 @@
          <obj_property name="ElementShortName">data_out_valid_q</obj_property>
          <obj_property name="ObjectShortName">data_out_valid_q</obj_property>
       </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl_start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_start</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_start</obj_property>
+      </wvobject>
    </wvobject>
    <wvobject fp_name="group208" type="group">
       <obj_property name="label">Card</obj_property>
@@ -754,6 +750,78 @@
       <wvobject fp_name="/testbench/card_b/cmd_rx" type="array" db_ref_id="1">
          <obj_property name="ElementShortName">cmd_rx[5:0]</obj_property>
          <obj_property name="ObjectShortName">cmd_rx[5:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group212" type="group">
+      <obj_property name="label">SDBoot</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/rst" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/cmd" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cmd[6:0]</obj_property>
+         <obj_property name="ObjectShortName">cmd[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/en_clk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">en_clk</obj_property>
+         <obj_property name="ObjectShortName">en_clk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/div_clk" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">div_clk[7:0]</obj_property>
+         <obj_property name="ObjectShortName">div_clk[7:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/sclk" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sclk</obj_property>
+         <obj_property name="ObjectShortName">sclk</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/SDctrl_valid_status" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_valid_status</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_valid_status</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/SDctrl_status" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_status[6:0]</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_status[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/SDctrl_available" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_available</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_available</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/status" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">status[1:0]</obj_property>
+         <obj_property name="ObjectShortName">status[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/SDctrl_start" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">SDctrl_start</obj_property>
+         <obj_property name="ObjectShortName">SDctrl_start</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/cs" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">cs</obj_property>
+         <obj_property name="ObjectShortName">cs</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/state" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">state[2:0]</obj_property>
+         <obj_property name="ObjectShortName">state[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/cnt" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">cnt[3:0]</obj_property>
+         <obj_property name="ObjectShortName">cnt[3:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/result" type="array" db_ref_id="1">
+         <obj_property name="ElementShortName">result[6:0]</obj_property>
+         <obj_property name="ObjectShortName">result[6:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/sclk_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">sclk_q</obj_property>
+         <obj_property name="ObjectShortName">sclk_q</obj_property>
+      </wvobject>
+      <wvobject fp_name="/testbench/Inst_SD_spi_top/SDctrl0/SDBoot0/available_q" type="logic" db_ref_id="1">
+         <obj_property name="ElementShortName">available_q</obj_property>
+         <obj_property name="ObjectShortName">available_q</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>

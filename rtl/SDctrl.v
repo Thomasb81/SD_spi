@@ -2,19 +2,14 @@ module SDctrl(
 input clk,
 input rst,
 
-
 output sclk,
 output mosi,
 input miso, 
-output reg cs,
+output cs,
 
-
-input [6:0] cmd,
+output [6:0] cmd,
 input [31:0] address,
 input en,
-input en_clk,
-input [7:0] div_clk,
-input i_cs,
 
 output valid_status,
 output [6:0] resp_status,
@@ -27,6 +22,9 @@ output data_out_valid
 );
 
 reg sd_en_q; 
+wire en_clk;
+wire [7:0] div_clk;
+wire en_boot;
 
 
 /* clock divider */
@@ -62,15 +60,33 @@ spi_cmd spi_cmd0(
 );
 
 
+SDBoot SDBoot0(
+.clk(clk),
+.rst(rst),
+
+.cmd(cmd),
+.SDctrl_start(en_boot),
+.en_clk(en_clk),
+.div_clk(div_clk),
+.cs(cs),
+.sclk(sclk),
+.SDctrl_valid_status(valid_status),
+.SDctrl_status(resp_status),
+.SDctrl_available(rdy), 
+
+.status()
+);
+
+
+
+
 // resync of enable and cs
 always @(posedge clk) begin
  if (rst == 1'b1) begin
    sd_en_q <= 1'b0;
-   cs <= 1'b1;
  end
  else if (sclk == 1'b0) begin
-   sd_en_q <= en;
-   cs <= i_cs;
+   sd_en_q <= en || en_boot;
  end
 end
 

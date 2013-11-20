@@ -34,12 +34,9 @@ reg [6:0] cmd_rx;
 
 
 /*SD */
-reg [6:0] sd_cmd;
-reg sd_en;
+wire [6:0] sd_cmd;
 reg sd_en_clk;
-reg [7:0] sd_div_clk;
 reg [6:0] sd_status;
-reg cs_delay;
 wire rdy_w;
 wire [6:0] sd_status_w;
 wire sd_valid_status_w;
@@ -103,11 +100,7 @@ always @(posedge clk96m) begin
     rx_state <= `RX_IDLE;
     cmd_rx <= 7'h00;
 
-    sd_cmd <= 7'h00;
-    sd_en <= 1'b0;
     sd_en_clk <= 1'b0;
-    sd_div_clk <= 8'hd0;
-    cs_delay <= 1'b1;
     driver_start <= 1'b0;
 
   end
@@ -132,11 +125,7 @@ always @(posedge clk96m) begin
       if (valid_data_rx == 1'b1) begin
         rx_state <= `RX_IDLE;
         case(cmd_rx)
-        7'd0: cs_delay <= data_rx[0];
         7'd1: sd_en_clk <= data_rx[0];
-        7'd2: sd_div_clk <= data_rx;
-        7'd3: sd_cmd <= data_rx[6:0];
-        7'd4: sd_en <= data_rx[0];
         7'd5: driver_start <= data_rx[0];
         endcase
       end
@@ -172,7 +161,7 @@ always @(posedge clk96m) begin
     sd_status <= 7'hff;
   else if (sd_valid_status_w == 1'b1)
     sd_status <= sd_status_w;
-  else if (sd_en ==1'b0 && SDctrl_start==1'b0)
+  else if ( SDctrl_start==1'b0)
     sd_status <= 7'hff;
 end
 
@@ -187,10 +176,7 @@ SDctrl SDctrl0(
 
 .cmd(sd_cmd),
 .address(sd_address),
-.en( sd_en || SDctrl_start ),
-.en_clk(sd_en_clk),
-.div_clk(sd_div_clk),
-.i_cs(cs_delay),
+.en( SDctrl_start ),
 
 .valid_status(sd_valid_status_w),
 .resp_status(sd_status_w),
