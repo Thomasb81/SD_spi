@@ -21,11 +21,11 @@ output data_out_valid
 
 );
 
-reg sd_en_q; 
+wire sd_en_q; 
 wire en_clk;
 wire [7:0] div_clk;
 wire en_boot;
-
+wire sclk_fall;
 
 /* clock divider */
 SDDivider spi_clk0(
@@ -33,7 +33,8 @@ SDDivider spi_clk0(
 .rst(rst),
 .en(en_clk),
 .value(div_clk),
-.sclk(sclk)
+.sclk(sclk),
+.sclk_fall(sclk_fall)
 );
 
 
@@ -44,6 +45,7 @@ spi_cmd spi_cmd0(
 .cmd(cmd),
 .idata(address),
 .en(sd_en_q),
+.sclk_fall(sclk_fall),
 
 .sclk(sclk),
 .mosi(mosi),
@@ -70,6 +72,7 @@ SDBoot SDBoot0(
 .div_clk(div_clk),
 .cs(cs),
 .sclk(sclk),
+.sclk_fall(sclk_fall),
 .SDctrl_valid_status(valid_status),
 .SDctrl_status(resp_status),
 .SDctrl_available(rdy), 
@@ -78,18 +81,6 @@ SDBoot SDBoot0(
 );
 
 
-
-
-// resync of enable and cs
-always @(posedge clk) begin
- if (rst == 1'b1) begin
-   sd_en_q <= 1'b0;
- end
- else if (sclk == 1'b0) begin
-   sd_en_q <= en || en_boot;
- end
-end
-
-
+assign sd_en_q = en || en_boot;
 
 endmodule

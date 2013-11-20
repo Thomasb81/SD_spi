@@ -5,6 +5,7 @@ input rst,
 input [6:0] cmd,
 input [31:0] idata,
 input en,
+input sclk_fall,
 
 input sclk,
 output mosi,
@@ -21,7 +22,7 @@ output data_out_valid
 );
 
 
-reg [3:0] cpt;
+reg [2:0] cpt;
 
 wire [45:0] cmd_message;
 wire [7:0] data;
@@ -30,12 +31,12 @@ wire known_cmd;
 wire spi_en;
 wire valid_status_internal;
 reg valid_status_internal_q;
+wire cpt_inf6;
 
 reg sclk_q;
 reg en_q;
 reg [7:0] rsp_message;
 
-wire sclk_en;
 
 
 `define RECV_IDLE 2'b00
@@ -43,7 +44,7 @@ wire sclk_en;
 `define RECV_DATA 2'b10
 `define RECV_CRC 2'b11
 
-reg [12:0] recv_cpt;
+reg [11:0] recv_cpt;
 reg [1:0] recv_state;
 reg data_out_valid_q;
 
@@ -66,9 +67,9 @@ always @(posedge clk) begin
     cpt <= 0;
   end
   else begin
-    if (en == 1'b1 ) begin
-      if ( sclk_en == 1'b1) begin
-        if (spi_state == 3'b000 && cpt < 4'd6)begin
+    if (en_q == 1'b1 ) begin
+      if ( sclk_fall == 1'b1) begin
+        if (spi_state == 3'b000 && cpt_inf6 == 1'b1)begin
           cpt <= cpt +1;
         end
       end
@@ -96,7 +97,6 @@ assign known_cmd = (cmd == 6'd0 || cmd == 6'd1 || cmd == 6'd17 );
 assign valid_status_internal = (cpt == 6 && rsp_message[7] ==1'b0 && known_cmd && rdy== 1'b0) ? 1'b1 : 1'b0;
 
 assign resp_status = rsp_message[6:0];
-assign resp_long_status = 32'h00000000;
 assign valid_status = valid_status_internal_q == 1'b0 && valid_status_internal == 1'b1 && recv_state==`RECV_IDLE; 
 
 //ready handling and valid status
@@ -107,16 +107,27 @@ always @(posedge clk) begin
     valid_status_internal_q <= 1'b0;
   end
   else begin
-    en_q <= en;
     valid_status_internal_q <= valid_status_internal;
-    if (en_q ==1'b0 && en == 1'b1) begin
+    
+    if (en == 1'b1) begin
       rdy <= 1'b0; 
     end
-    else if ((cmd == 6'd0 || cmd == 6'd1)  && cpt == 6 && valid_status == 1'b1 ) begin
+
+    if (rdy == 1'b0) begin
+      if (sclk == 1'b0) begin
+        en_q <= 1'b1;
+      end
+    end
+
+
+    
+    if ((cmd == 6'd0 || cmd == 6'd1)  && cpt == 6 && valid_status == 1'b1 ) begin
       rdy <= 1'b1;
+      en_q <= 1'b0;
     end
     else if ((cmd == 6'd17)  && recv_state == `RECV_CRC && recv_cpt[4] == 1'b1) begin
       rdy <= 1'b1;
+      en_q <= 1'b0;
     end
   end
 end
@@ -133,14 +144,14 @@ always @(posedge clk) begin
   end 
 end
 
-assign sclk_en = sclk_q == 1'b1 && sclk ==1'b0; 
-assign spi_en = en && (cpt < 6);
+assign spi_en = en_q && (cpt_inf6 == 1'b1);
+assign cpt_inf6 = (cpt < 6)? 1'b1 : 1'b0;
 
 spi spi0 (
 .clk(clk),
 .rst(rst),
 .sclk(sclk),
-.sclk_q(sclk_q),
+.sclk_fall(sclk_fall),
 .en(spi_en),
 .byte_idata(data),
 
@@ -183,7 +194,7 @@ always @(posedge clk) begin
        end
        end
        `RECV_DATA: begin
-       if (recv_cpt == 13'b0111111111111) begin
+       if (recv_cpt == 12'b111111111111) begin
          recv_cpt <=0;
          recv_state <= `RECV_CRC;
        end
@@ -192,7 +203,7 @@ always @(posedge clk) begin
        end
        end
        `RECV_CRC:begin
-       if (recv_cpt == 13'b0000000010000) begin
+       if (recv_cpt[4:0] == 5'b10000) begin
          recv_cpt <=0;
          recv_state <= `RECV_IDLE;
        end

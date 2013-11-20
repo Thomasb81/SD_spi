@@ -3,7 +3,7 @@ input clk,
 input rst,
 
 input sclk,
-input sclk_q,
+input sclk_fall,
 input en,
 input [7:0] byte_idata,
 
@@ -22,7 +22,7 @@ always @(posedge clk) begin
   end
   else begin
     if (en == 1'b1) begin
-      if (sclk_q == 1'b1 && sclk == 1'b0) begin
+      if (sclk_fall == 1'b1) begin
         state <= state -1;
       end
     end
