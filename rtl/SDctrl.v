@@ -71,13 +71,10 @@ SDBoot SDBoot0(
 .en_clk(en_clk),
 .div_clk(div_clk),
 .cs(cs),
-.sclk(sclk),
 .sclk_fall(sclk_fall),
 .SDctrl_valid_status(valid_status),
 .SDctrl_status(resp_status),
-.SDctrl_available(rdy), 
-
-.status()
+.SDctrl_available(rdy) 
 );
 
 

@@ -150,7 +150,6 @@ assign cpt_inf6 = (cpt < 6)? 1'b1 : 1'b0;
 spi spi0 (
 .clk(clk),
 .rst(rst),
-.sclk(sclk),
 .sclk_fall(sclk_fall),
 .en(spi_en),
 .byte_idata(data),

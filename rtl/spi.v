@@ -2,7 +2,6 @@ module spi (
 input clk,
 input rst,
 
-input sclk,
 input sclk_fall,
 input en,
 input [7:0] byte_idata,

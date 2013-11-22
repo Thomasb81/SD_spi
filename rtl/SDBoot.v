@@ -8,13 +8,11 @@ module SDBoot(
     output en_clk,
     output [7:0] div_clk,
     output reg cs,
-    input sclk,
     input sclk_fall,
     input SDctrl_valid_status,
     input [6:0] SDctrl_status,
-    input SDctrl_available, 
+    input SDctrl_available 
 
-    output [1:0] status
 );
 
 `define RESET 2'b00
@@ -90,5 +88,9 @@ assign en_clk = 1'b1;
 assign cmd = (cnt == 7'h00 && state == `WAIT_STATUS) ? 7'h11 :
              (state == `CMD1 || state == `WAIT_STATUS) ? 7'h01 : 7'h00;
 
+
+initial begin
+  state <= `RESET;
+end
 
 endmodule

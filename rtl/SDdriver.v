@@ -4,9 +4,9 @@ module SDdriver(
     input rst,
 
     input start,
+    input stop,
     input [7:0] sample_code,
     input fifo_empty,
-    input fifo_full,
     input fifo_prog,
     output reg fifo_wr,
     output reg [15:0] fifo_data,
@@ -18,8 +18,7 @@ module SDdriver(
     output reg SDctrl_start,
     
     output reg [2:0] state,
-    output reg [31:0] nb_data,
-    output reg [10:0] data_cpt
+    output reg [31:0] nb_data
 
 );
 
@@ -29,23 +28,13 @@ module SDdriver(
 `define FETCH 3'b010
 `define WAIT 3'b011
 
-reg available_q;
+reg [10:0] data_cpt;
 reg [7:0] addr;
 wire finish;
 wire [8:0] cpt_bottom;
 wire [8:0] cpt_up;
 reg [22:0] block_cnt;
 reg block_part;
-
-always @(posedge clk) begin
-  if (rst == 1'b1) begin
-    available_q <= 1'b0;
-  end
-  else begin
-    available_q <= SDctrl_available;
-  end
-end
-
 
 always @(posedge clk) begin
   if (rst == 1'b1) begin
@@ -57,18 +46,15 @@ always @(posedge clk) begin
     addr <= 8'h00;
     block_part <= 1'b0;
     block_cnt <= 23'h000000;
+    nb_data <= 32'h00000000;
   end
   else begin
     fifo_wr <= 1'b0;
 
-    if (available_q == 1'b0 && SDctrl_available == 1'b1 && SDctrl_start == 1'b1) begin
-      SDctrl_start <= 1'b0;
-    end
-
-
+    SDctrl_start <= 1'b0;
     case(state)
       `IDLE: begin
-        if (start == 1'b1 && available_q == 1'b1 && SDctrl_available == 1'b1 && fifo_empty == 1'b1) begin
+        if (start == 1'b1 && SDctrl_available == 1'b1 && fifo_empty == 1'b1) begin
           state <= `BOOT;
           SDctrl_start <= 1'b1;
           data_cpt <= 11'h000;
@@ -93,7 +79,7 @@ always @(posedge clk) begin
           endcase
         end
   
-        if (available_q == 1'b1 && SDctrl_available ==1'b1 && SDctrl_start == 1'b0) begin
+        if (SDctrl_available ==1'b1 && SDctrl_start == 1'b0) begin
           state <= `FIRST_FETCH;
           data_cpt <= 11'h000;
           SDctrl_start <= 1'b1;
@@ -127,7 +113,7 @@ always @(posedge clk) begin
           end
         end
 
-        if (available_q == 1'b1 && SDctrl_available ==1'b1 && data_cpt != 10'h000 ) begin
+        if (SDctrl_available ==1'b1 && data_cpt != 10'h000 ) begin
           if (finish == 1'b1) begin
             state <= `IDLE;
           end
@@ -156,7 +142,7 @@ always @(posedge clk) begin
           end
         end
 
-        if (available_q == 1'b1 && SDctrl_available ==1'b1 && data_cpt != 10'h000 ) begin
+        if (SDctrl_available ==1'b1 && data_cpt != 10'h000 ) begin
           if (finish == 1'b1) begin
             state <= `IDLE;
           end
@@ -191,7 +177,7 @@ always @(posedge clk) begin
 end
 
 
-assign finish = (nb_data == 0 )? 1'b1 : 1'b0;
+assign finish = (nb_data == 0 || stop==1'b1)? 1'b1 : 1'b0;
 assign SDctrl_address = {block_cnt,9'b000000000} ; 
 
 assign cpt_bottom = (state == `FIRST_FETCH) ? addr[7:0] : 
@@ -200,8 +186,6 @@ assign cpt_bottom = (state == `FIRST_FETCH) ? addr[7:0] :
 assign cpt_up = (state ==`FIRST_FETCH) ? 512 - addr[7:0] :
                      (block_part == 1'b0) ? 9'hff : 9'h1ff;
                      
-
-
 
 initial begin
   state <= `IDLE;

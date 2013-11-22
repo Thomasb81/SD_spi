@@ -34,29 +34,12 @@ reg [6:0] cmd_rx;
 
 
 /*SD */
-wire [6:0] sd_cmd;
-reg sd_en_clk;
-reg [6:0] sd_status;
-wire rdy_w;
-wire [6:0] sd_status_w;
-wire sd_valid_status_w;
-reg driver_start;
+reg note_on;
+reg note_off;
 
-wire [31:0] sd_address;
-wire [7:0] data_driver;
-wire data_driver_valid;
-wire SDctrl_start;
 
-wire [2:0] driver_state;
-wire [31:0] driver_nb_data;
 wire [10:0] driver_data_cpt;
 
-
-wire fifo_empty;
-wire fifo_full;
-wire fifo_halffull;
-wire fifo_wr_en;
-wire [15:0] fifo_data_in;
 
 reg [10:0] tick_48k;
 reg fifo_rd_en;
@@ -100,8 +83,8 @@ always @(posedge clk96m) begin
     rx_state <= `RX_IDLE;
     cmd_rx <= 7'h00;
 
-    sd_en_clk <= 1'b0;
-    driver_start <= 1'b0;
+    note_on <= 1'b0;
+    note_off <= 1'b0;
 
   end
   else begin
@@ -125,8 +108,8 @@ always @(posedge clk96m) begin
       if (valid_data_rx == 1'b1) begin
         rx_state <= `RX_IDLE;
         case(cmd_rx)
-        7'd1: sd_en_clk <= data_rx[0];
-        7'd5: driver_start <= data_rx[0];
+        7'd5: note_on <= data_rx[0];
+        7'd6: note_off <= data_rx[0];
         endcase
       end
     end
@@ -134,39 +117,20 @@ always @(posedge clk96m) begin
   end
 end
 
-assign data_tx = (cmd_rx ==7'd5 )? {7'h00,rdy_w} :
-                 (cmd_rx ==7'd6 )? {1'b0,sd_status} :
-                 (cmd_rx ==7'd7 )? {5'h00,driver_state}:
-                 (cmd_rx ==7'd8 )? sd_address[7:0]:
-                 (cmd_rx ==7'd9 )? sd_address[15:8]:
-                 (cmd_rx ==7'd10 )? sd_address[23:16]:
-                 (cmd_rx ==7'd11 )? sd_address[31:24]:
-                 (cmd_rx ==7'd12 )? driver_nb_data[7:0]:
-                 (cmd_rx ==7'd13 )? driver_nb_data[15:8]:
-                 (cmd_rx ==7'd14 )? driver_nb_data[23:16]:
-                 (cmd_rx ==7'd15 )? driver_nb_data[31:24]:
-                 (cmd_rx ==7'd16 )? driver_data_cpt[7:0]:
-                 (cmd_rx ==7'd17 )? {5'b00000,driver_data_cpt[10:8]}:
-                 8'h55;
+assign data_tx = 
+               8'h55;
+
 assign valid_data_tx = (rx_state == `RX_RD) ? 1'b1 : 1'b0;
 
-assign {led4,led3,led2,led1} = {rdy_w,fifo_full,fifo_halffull,fifo_empty};
+assign {led4,led3,led2,led1} = {1'b0,1'b0,note_off,note_on};
 
 assign audio_l = dac_out;
 assign audio_r = dac_out;
 
 
-always @(posedge clk96m) begin
-  if (rst == 1'b1)
-    sd_status <= 7'hff;
-  else if (sd_valid_status_w == 1'b1)
-    sd_status <= sd_status_w;
-  else if ( SDctrl_start==1'b0)
-    sd_status <= 7'hff;
-end
 
-SDctrl SDctrl0(
-.clk(clk96m),
+SDFeed SD_ss0(
+.clk96m(clk96m),
 .rst(rst),
 
 .sclk(sck),
@@ -174,55 +138,15 @@ SDctrl SDctrl0(
 .miso(do),
 .cs(cs),
 
-.cmd(sd_cmd),
-.address(sd_address),
-.en( SDctrl_start ),
+.id(8'h00),
+.note_on(note_on),
+.note_off(note_off),
+.completed(),
 
-.valid_status(sd_valid_status_w),
-.resp_status(sd_status_w),
-.rdy(rdy_w),
-
-.data_out(data_driver),
-.data_out_valid(data_driver_valid)
-
-);
-
-SDdriver SDdriver0(
-.clk(clk96m),
-.rst(rst),
-.start(driver_start),
-.sample_code(8'h00),
-.fifo_empty(fifo_empty),
-.fifo_full(fifo_full),
-.fifo_prog(fifo_halffull),
-.fifo_wr(fifo_wr_en),
-.fifo_data(fifo_data_in),
-
-.SDctrl_data(data_driver),
-.SDctrl_valid(data_driver_valid),
-.SDctrl_available(rdy_w),
-
-.SDctrl_address(sd_address),
-.SDctrl_start(SDctrl_start),
-.state(driver_state),
-.nb_data(driver_nb_data),
-.data_cpt(driver_data_cpt)
-
-);
-
-
-fifo_256w fifo0(
-.clk(clk96m),
-.srst(rst),
-.din(fifo_data_in),
-.wr_en(fifo_wr_en),
 .rd_en(fifo_rd_en),
-.dout(fifo_out),
-.full(fifo_full),
-.empty(fifo_empty),
-.prog_full(fifo_halffull)
-);
+.data_out(fifo_out)
 
+);
 
 
 
@@ -241,7 +165,7 @@ always @(posedge clk96m) begin
   end
 end
 
-assign pcm = (fifo_empty== 1'b1) ? 16'h8000 : fifo_out;
+assign pcm = fifo_out;
 
 dac16 dac0 (
 .clk(clk96m), 
