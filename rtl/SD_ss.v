@@ -7,7 +7,7 @@ output mosi,
 input miso,
 output cs,
 
-input [6:0] id,
+input [7:0] id,
 
 input note_on,
 input note_off,
@@ -61,7 +61,7 @@ SDdriver SDdriver0(
 .rst(rst),
 .start(note_on),
 .stop(note_off),
-.sample_code({1'b0,id}),
+.sample_code(id),
 .fifo_empty(fifo_empty),
 .fifo_prog(fifo_halffull),
 .fifo_wr(fifo_wr_en),
