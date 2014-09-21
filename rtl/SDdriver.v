@@ -57,10 +57,12 @@ always @(posedge clk) begin
     nb_data <= 32'h00000000;
   end
   else begin
+    
     fifo_wr <= 1'b0;
-
     SDctrl_start <= 1'b0;
+    
     case(state)
+      // IDLE State. Top of FSM
       `IDLE: begin
         if (start == 1'b1 && SDctrl_available == 1'b1 && fifo_empty == 1'b1) begin
           state <= `BOOT;
@@ -72,6 +74,8 @@ always @(posedge clk) begin
           state <= `IDLE;
         end
       end
+      //Configure SDCtrl to fetch the 8 Bytes of 'header' data associated to
+      //a sample code
       `BOOT:begin
         if (SDctrl_valid == 1'b1) begin
           data_cpt <= data_cpt + 1;
@@ -96,6 +100,8 @@ always @(posedge clk) begin
           state <= `BOOT;
         end
       end
+      // Fetch the firt time. The maximum number of data
+      // 512 data max but do not cross 512 data barrier
       `FIRST_FETCH:
       begin
         if (SDctrl_valid == 1'b1 && finish == 1'b0)begin
@@ -133,6 +139,7 @@ always @(posedge clk) begin
           state <= `FIRST_FETCH;
         end
       end
+      // Fetch 256 data soon as space is available in the fifo
       `FETCH:
       begin
         if (SDctrl_valid == 1'b1 && finish == 1'b0)begin
@@ -169,6 +176,7 @@ always @(posedge clk) begin
           state <= `FETCH;
         end
       end
+    //Wait state
     `WAIT:
     begin
       if (fifo_prog == 1'b0 && SDctrl_start == 1'b0) begin

@@ -47,6 +47,7 @@ wire [15:0] fifo_out;
 wire [15:0] pcm;
 wire dac_out;
 
+wire [2:0] SDdriver_state;
 
 
 /* reset stuff*/
@@ -122,7 +123,7 @@ assign data_tx =
 
 assign valid_data_tx = (rx_state == `RX_RD) ? 1'b1 : 1'b0;
 
-assign {led4,led3,led2,led1} = {1'b0,1'b0,note_off,note_on};
+assign {led4,led3,led2,led1} = {SDdriver_state,note_on};
 
 assign audio_l = dac_out;
 assign audio_r = dac_out;
@@ -144,8 +145,11 @@ SDFeed SD_ss0(
 .completed(),
 
 .rd_en(fifo_rd_en),
-.data_out(fifo_out)
-
+.data_out(fifo_out),
+.fifo_full(fifo_full),
+.fifo_empty(fifo_empty),
+.fifo_halffull(fifo_half),
+.SDdriver_state(SDdriver_state)
 );
 
 
