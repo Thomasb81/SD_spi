@@ -22,6 +22,14 @@ module SDdriver(
 
 );
 
+/*
+* SD Driver module read an entry at the beginning of the memory card relatif
+* to sample code. Then fetch a first block of data until it is align on 512
+* byte. 512 byte => 256 samples.
+ */
+
+
+
 `define IDLE 3'b000
 `define BOOT 3'b001
 `define FIRST_FETCH 3'b100
@@ -101,7 +109,7 @@ always @(posedge clk) begin
             block_part <= 1'b0;
           end
 
-          if (cpt_bottom <= data_cpt && data_cpt <= cpt_up) begin
+          if (cpt_bottom <= data_cpt && data_cpt <= 512) begin
             nb_data <= nb_data -1;
             if (data_cpt[0]==1'b0) begin
                fifo_data[7:0] <= SDctrl_data;
@@ -183,8 +191,7 @@ assign SDctrl_address = {block_cnt,9'b000000000} ;
 assign cpt_bottom = (state == `FIRST_FETCH) ? addr[7:0] : 
                      (block_part == 1'b0) ? 9'h00 : 9'h100;
 
-assign cpt_up = (state ==`FIRST_FETCH) ? 512 - addr[7:0] :
-                     (block_part == 1'b0) ? 9'hff : 9'h1ff;
+assign cpt_up = (block_part == 1'b0) ? 9'hff : 9'h1ff;
                      
 
 initial begin

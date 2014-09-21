@@ -371,7 +371,7 @@ class randtermFrame(wx.Frame, Thread):
     self.serialCon.xonxoff  = self.xonoffCheck.IsChecked()
     self.serialCon.rtscts   = self.rtsctsCheck.IsChecked()
     self.serialCon.dsrdtr   = self.dsrdtrCheck.IsChecked()
-    self.serialCon.timeout  = .3
+    self.serialCon.timeout  = .001
 
     self.cfg.Write('portname', self.portName)
     self.cfg.Write('baud',     baudRadio.GetLabel())
