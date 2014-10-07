@@ -36,7 +36,7 @@ reg [6:0] cmd_rx;
 /*SD */
 reg note_on;
 reg note_off;
-
+reg [7:0] id;
 
 wire [10:0] driver_data_cpt;
 
@@ -86,6 +86,7 @@ always @(posedge clk96m) begin
 
     note_on <= 1'b0;
     note_off <= 1'b0;
+    id <= 8'h00;
 
   end
   else begin
@@ -111,6 +112,7 @@ always @(posedge clk96m) begin
         case(cmd_rx)
         7'd5: note_on <= data_rx[0];
         7'd6: note_off <= data_rx[0];
+	7'd7: id <= data_rx;
         endcase
       end
     end
@@ -139,7 +141,7 @@ SDFeed SD_ss0(
 .miso(do),
 .cs(cs),
 
-.id(8'h00),
+.id(id),
 .note_on(note_on),
 .note_off(note_off),
 .completed(),

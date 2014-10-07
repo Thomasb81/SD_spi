@@ -34,10 +34,11 @@ module SDdriver(
 `define FETCH 3'b010
 `define WAIT 3'b011
 
-reg [8:0] data_cpt;
+reg [10:0] data_cpt;
 reg [7:0] addr;
 reg [22:0] block_cnt;
 reg block_part;
+reg [7:0] sample_code_latch;
 
 wire finish;
 wire [8:0] cpt_bottom;
@@ -52,9 +53,10 @@ always @(posedge clk) begin
     state <= `IDLE;
     block_cnt <= 23'h000000;
     nb_data <= 32'h00000000;
-    data_cpt <= 9'h000;
+    data_cpt <= 11'h000;
     addr <= 8'h00;
     block_part <= 1'b0;
+    sample_code_latch <= 8'h00;
 
   end
   else begin
@@ -66,8 +68,9 @@ always @(posedge clk) begin
       if (start == 1'b1 && SDctrl_available == 1'b1 && SDctrl_available_latch == 1'b1) begin
         state <= `BOOT;
         SDctrl_start <= 1'b1;
-        data_cpt <= 9'h000;
+        data_cpt <= 11'h000;
         block_cnt <= 23'h000000;
+	sample_code_latch <= sample_code+1;
       end
       else begin
         state <= `IDLE;
@@ -77,7 +80,7 @@ always @(posedge clk) begin
     `BOOT: begin
       if (fifo_empty == 1'b1 & state_end_latch == 1'b1 & SDctrl_available == 1'b1 && SDctrl_available_latch == 1'b1) begin
 	state <= `FIRST_FETCH;
-	data_cpt <= 9'h000;
+	data_cpt <= 11'h000;
 	SDctrl_start <= 1'b1;
       end
       else begin
@@ -85,14 +88,14 @@ always @(posedge clk) begin
 	if (SDctrl_valid == 1'b1 ) begin
 	  data_cpt <= data_cpt +1;
 	  case(data_cpt)
-            0+((sample_code+1)<<3): addr[7:0] <= SDctrl_data;
-            1+((sample_code+1)<<3): {block_cnt[6:0],block_part} <= SDctrl_data;
-            2+((sample_code+1)<<3): block_cnt[14:7] <= SDctrl_data;
-            3+((sample_code+1)<<3): block_cnt[22:15] <= SDctrl_data;
-            4+((sample_code+1)<<3): nb_data[7:0] <= SDctrl_data;
-            5+((sample_code+1)<<3): nb_data[15:8] <= SDctrl_data;
-            6+((sample_code+1)<<3): nb_data[23:16] <= SDctrl_data;
-            7+((sample_code+1)<<3): nb_data[31:24] <= SDctrl_data;
+            0+((sample_code_latch)<<3): addr[7:0] <= SDctrl_data;
+            1+((sample_code_latch)<<3): {block_cnt[6:0],block_part} <= SDctrl_data;
+            2+((sample_code_latch)<<3): block_cnt[14:7] <= SDctrl_data;
+            3+((sample_code_latch)<<3): block_cnt[22:15] <= SDctrl_data;
+            4+((sample_code_latch)<<3): nb_data[7:0] <= SDctrl_data;
+            5+((sample_code_latch)<<3): nb_data[15:8] <= SDctrl_data;
+            6+((sample_code_latch)<<3): nb_data[23:16] <= SDctrl_data;
+            7+((sample_code_latch)<<3): nb_data[31:24] <= SDctrl_data;
 	  endcase
 	end
       end
@@ -110,7 +113,7 @@ always @(posedge clk) begin
 	if (SDctrl_valid == 1'b1 ) begin
 	  data_cpt <= data_cpt + 1;
 	  //handle address
-	  if (data_cpt==9'h1ff) begin
+	  if (data_cpt==11'h1ff) begin
 	    block_cnt <= block_cnt +1;
 	  end
 	  //handle data
@@ -164,10 +167,10 @@ always @(posedge clk) begin
       if (finish ==  1'b1)begin
         state <= `IDLE;
       end
-      else if (fifo_prog == 1'b0 && SDctrl_available == 1'b1 && SDctrl_available_latch == 1'b1) begin
+      else if (fifo_prog == 1'b1 && SDctrl_available == 1'b1 && SDctrl_available_latch == 1'b1) begin
 	state <= `FETCH;
         SDctrl_start <= 1'b1;
-	data_cpt <= 9'h000;
+	data_cpt <= 11'h000;
       end
       else begin
 	state <= `WAIT;
@@ -185,10 +188,10 @@ assign SDctrl_address = {block_cnt,9'b000000000} ;
 
 assign cpt_bottom = (state == `FIRST_FETCH) ? {block_part,addr[7:0]} : {block_part,8'h00}; 
 
-assign state_end = (state == `BOOT && data_cpt == 7+((sample_code+1)<<3) +1) ||
-	           (state == `FIRST_FETCH && data_cpt == 9'h1ff) || 
-		   (state == `FETCH && block_part == 1'b0 && data_cpt == 9'h0ff) ||
-		   (state == `FETCH && block_part == 1'b1 && data_cpt == 9'h1ff) ||
+assign state_end = (state == `BOOT && data_cpt == 7+((sample_code_latch)<<3) +1) ||
+	           (state == `FIRST_FETCH && data_cpt == 11'h1ff) || 
+		   (state == `FETCH && block_part == 1'b0 && data_cpt == 11'h0ff) ||
+		   (state == `FETCH && block_part == 1'b1 && data_cpt == 11'h1ff) ||
 		   finish;
 
 always @(posedge clk) begin

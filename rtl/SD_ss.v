@@ -78,22 +78,20 @@ SDdriver SDdriver0(
 
 );
 
-
-fifo_256w fifo0(
+fifo #(
+  .bits(8),
+  .data_width(16)
+  )
+  fifo1(
 .clk(clk96m),
-.srst(rst),
-.din(fifo_data_in),
-.wr_en(fifo_wr_en),
-.rd_en(rd_en),
-.dout(data_out),
+.rst(rst),
+.wr(fifo_wr_en),
+.rd(rd_en),
+.write(fifo_data_in),
+.read(data_out),
 .full(fifo_full),
 .empty(fifo_empty),
-.prog_full(fifo_halffull)
+.midle(fifo_halffull)
 );
-
-
-
-
-
 
 endmodule
